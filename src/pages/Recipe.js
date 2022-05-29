@@ -13,6 +13,7 @@ const Recipe = () => {
     );
     const detailData = await data.json();
     setDetails(detailData);
+    console.log(detailData);
   };
 
   useEffect(() => {
@@ -37,6 +38,9 @@ const Recipe = () => {
         >
           Ingredients
         </Button>
+        <div>
+          <h3 dangerouslySetInnerHTML={{ __html: details.summary }}></h3>
+        </div>
       </Info>
     </DetailWrapper>
   );
