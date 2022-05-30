@@ -13,7 +13,7 @@ const Recipe = () => {
     );
     const detailData = await data.json();
     setDetails(detailData);
-    console.log(detailData);
+    console.log(detailData.extendedIngredients.length);
   };
 
   useEffect(() => {
@@ -38,10 +38,19 @@ const Recipe = () => {
         >
           Ingredients
         </Button>
-        <div>
-          <h3 dangerouslySetInnerHTML={{ __html: details.summary }}></h3>
-          <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}></h3>
-        </div>
+        {activeTab === 'instructions' && (
+          <div>
+            <h3 dangerouslySetInnerHTML={{ __html: details.summary }}></h3>
+            <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}></h3>
+          </div>
+        )}
+        {activeTab === 'ingredients' && (
+          <ul>
+            {details.extendedIngredients?.map((ingredientItem) => (
+              <li key={ingredientItem.id}>{ingredientItem.original}</li>
+            ))}
+          </ul>
+        )}
       </Info>
     </DetailWrapper>
   );
